@@ -307,23 +307,23 @@
 
  };
 
-gnd.sprite.src="img/ground.png";
-bg.sprite.src="img/BG.png";
-pipe.top.sprite.src="img/toppipe.png";
-pipe.bot.sprite.src="img/botpipe.png";
-UI.gameOver.sprite.src="img/go.png";
-UI.getReady.sprite.src="img/getready.png";
-UI.tap[0].sprite.src="img/tap/t0.png";
-UI.tap[1].sprite.src="img/tap/t1.png";
-bird.animations[0].sprite.src="img/bird/b0.png";
-bird.animations[1].sprite.src="img/bird/b1.png";
-bird.animations[2].sprite.src="img/bird/b2.png";
-bird.animations[3].sprite.src="img/bird/b0.png";
-SFX.start.src = "sfx/start.wav"
-SFX.flap.src = "sfx/flap.wav"
-SFX.score.src = "sfx/score.wav"
-SFX.hit.src = "sfx/hit.wav"
-SFX.die.src = "sfx/die.wav"
+gnd.sprite.src="https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/img/ground.png";
+bg.sprite.src="https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/img/BG.png";
+pipe.top.sprite.src="https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/img/toppipe.png";
+pipe.bot.sprite.src="https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/img/botpipe.png";
+UI.gameOver.sprite.src="https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/img/go.png";
+UI.getReady.sprite.src="https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/img/getready.png";
+UI.tap[0].sprite.src="https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/img/tap/t0.png";
+UI.tap[1].sprite.src="https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/img/tap/t1.png";
+bird.animations[0].sprite.src="https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/img/bird/b0.png";
+bird.animations[1].sprite.src="https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/img/bird/b1.png";
+bird.animations[2].sprite.src="https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/img/bird/b2.png";
+bird.animations[3].sprite.src="https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/img/bird/b0.png";
+SFX.start.src = "https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/sfx/start.wav"
+SFX.flap.src = "https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/sfx/flap.wav"
+SFX.score.src = "https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/sfx/score.wav"
+SFX.hit.src = "https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/sfx/hit.wav"
+SFX.die.src = "https://github.com/D4rk1n/JS-Flappy-Bird/tree/master/sfx/die.wav"
 
 gameLoop();
 
