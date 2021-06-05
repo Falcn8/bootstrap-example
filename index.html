@@ -31,6 +31,7 @@
 	<!-- Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-GF0BW3HYHR"></script>
 	<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-GF0BW3HYHR');</script>
+	<script>window.onload = function removeAlert() { setTimeout(() => { document.getElementById("foundWebsiteAlert").g.remove(); }, 10000); }</script>
 </head>
 
 <body style="padding:10px">
@@ -70,7 +71,7 @@
 	
 
 	<!-- Alert -->
-	<div class="alert alert-success alert-dismissible fade show" role="alert">
+	<div class="alert alert-success alert-dismissible fade show" role="alert" id="foundWebsiteAlert">
 		<strong>Congratulations!</strong> You found my new website!
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">&times;</span>
