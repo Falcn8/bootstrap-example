@@ -1,0 +1,923 @@
+
+<!-- Design and Code by 
+Dawit Lee. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Psychic | Mobile Game</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="intro-page-container">
+    <svg class="logo">
+      <use href="#logo-white"></use>
+    </svg>
+    <div class="intro-page">
+      <h2 class="credit">Design and Code by</h2>
+      <div class="profile-img-container">
+        <svg class="profile-img">
+          <use href="#profile-img">
+        </svg>
+      </div>
+      <h3 class="profile-name">Dawit Lee.</h3>
+      <button class="btn got-it-btn">Got It</button>
+    </div>
+  </div>
+  <div class="instructions-page-container">
+    <svg class="logo">
+      <use href="#logo-white"></use>
+    </svg>
+    <div class="instructions-page">
+      <h2 class="instructions-title">Instructions</h2>
+      <div class="instructions">
+        <h3>o There is a hidden number</h3>
+        <h3>o Use your psychic powers to guess</h3>
+        <h3>o Insert your guess and "Check"</h3>
+        <h3>o You'll get hints at the bottom</h3>
+        <h3>o Try another guess and 'Check'</h3>
+        <h3>o 'Reset' to restart the game</h3>
+      </div>
+      <button class="btn start-btn">Start</button>
+    </div>
+  </div>
+  <div class="max">
+    <header class="header">
+      <svg id="logo">
+        <use href="#logo-white"></use>
+      </svg>
+
+      <div class="screen">
+        <div class="front">
+          <svg class="mystery-box">
+            <use href="#mystery-box"></use>
+          </svg>
+        </div>
+        <div class="back">
+          <div class="hidden-number-container">
+            <h3 class="hidden-number"></h3>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <label class="input-label" for="user-guess">Enter Your Number ( 1 - 20 )</label>
+      <input type="number" class="user-guess-input" id="user-guess" min="1" max="20">
+      <div class="btn-container">
+        <button class="btn check-btn">Check</button>
+        <button class="btn reset-btn">Reset</button>
+      </div>
+      <div class="message-container">
+        <svg class="message-icon-svg">
+          <use class="message-icon-use" href="#luck"></use>
+        </svg>
+        <h3 class="message-text">Good Luck!</h3>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="score-container">
+        <svg>
+          <use href="#star"></use>
+        </svg>
+        <h4 class="label-score">Score</h4>
+        <h5 class="score">...</h5>
+      </div>
+      <div class="high-score-container">
+        <svg>
+          <use href="#medal"></use>
+        </svg>
+        <h4 class="label-high-score">High Score</h4>
+        <h5 class="high-score">...</h5>
+      </div>
+    </footer>
+  </div>
+  <div class="try-again-page-container">
+    <svg class="logo">
+      <use href="#logo-white"></use>
+    </svg>
+    <div class="try-again-page">
+      <h2 class="try-again-title">You Lost!</h2>
+      <h3 class="score0">Score 0</h3>
+      <button class="btn try-again-btn">Try Again</button>
+    </div>
+  </div>
+  <svg width="0" height="0" class="hidden">
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.186 33.961" id="medal">
+      <g transform="translate(-20.75)">
+        <circle cx="13.484" cy="13.484" r="13.484" transform="translate(22.829)" fill="#ffd15c"></circle>
+        <path
+          d="M25.39 21.372l-4.64 8.042 5.415-.287 2.46 4.833 4.292-7.441a13.47 13.47 0 01-7.527-5.147zm21.873-.04a13.475 13.475 0 01-7.507 5.174l4.305 7.454 2.46-4.833 5.415.287z"
+          fill="#ffdc64"></path>
+        <circle cx="9.774" cy="9.774" r="9.774" transform="translate(26.539 3.71)" fill="#f8b64c"></circle>
+        <path
+          d="M43.011 12.428a.511.511 0 00-.281-.869l-3.857-.562a.5.5 0 01-.381-.281l-1.725-3.5a.51.51 0 00-.916 0l-1.718 3.5a.531.531 0 01-.381.281l-3.857.562a.511.511 0 00-.281.869l2.791 2.72a.515.515 0 01.147.448l-.655 3.837a.509.509 0 00.742.535l3.45-1.812a.5.5 0 01.475 0l3.45 1.812a.512.512 0 00.742-.535l-.662-3.837a.5.5 0 01.147-.448z"
+          fill="#ffdc64"></path>
+      </g>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84 84" id="mystery-box">
+      <path
+        d="M9.8 1.4h64.4a8.4 8.4 0 018.4 8.4v64.4a8.4 8.4 0 01-8.4 8.4H9.8a8.4 8.4 0 01-8.4-8.4V9.8a8.4 8.4 0 018.4-8.4z"
+        fill="#dc6c33"></path>
+      <g transform="translate(8.4 8.4)" fill="#faedbd">
+        <circle cx="3.5" cy="3.5" r="3.5"></circle>
+        <circle cx="3.5" cy="3.5" r="3.5" transform="translate(60.2)"></circle>
+        <circle cx="3.5" cy="3.5" r="3.5" transform="translate(0 60.2)"></circle>
+        <circle cx="3.5" cy="3.5" r="3.5" transform="translate(60.2 60.2)"></circle>
+        <path
+          d="M25.467 44.8h13.737a2.8 2.8 0 002.8-2.8v-4.44a2.8 2.8 0 01.82-1.98l1.16-1.16a2.8 2.8 0 011.98-.82h4.68a2.8 2.8 0 001.98-.82l5.36-5.36a2.8 2.8 0 00.82-1.98V13.76a2.8 2.8 0 00-.82-1.98l-5.36-5.36a2.8 2.8 0 00-1.98-.82h-32.68a2.8 2.8 0 00-1.98.82l-5.36 5.36a2.8 2.8 0 00-.82 1.98v8.64a2.8 2.8 0 002.8 2.8h5.6a2.8 2.8 0 002.8-2.8v-3.04a2.8 2.8 0 01.82-1.98l1.16-1.16a2.8 2.8 0 011.98-.82h17.28a2.8 2.8 0 011.98.82l1.16 1.16a2.8 2.8 0 01.82 1.98v4.44a2.8 2.8 0 01-2.8 2.8h-7.24a2.8 2.8 0 00-1.98.82l-8.16 8.16a2.8 2.8 0 00-.82 1.98v7.24m2.796 7h11.2a2.8 2.8 0 012.8 2.8v5.6a2.8 2.8 0 01-2.8 2.8H28a2.8 2.8 0 01-2.8-2.8v-5.6a2.8 2.8 0 012.8-2.8z">
+        </path>
+      </g>
+      <path
+        d="M9.8 1.4h64.4a8.4 8.4 0 018.4 8.4v64.4a8.4 8.4 0 01-8.4 8.4H9.8a8.4 8.4 0 01-8.4-8.4V9.8a8.4 8.4 0 018.4-8.4z"
+        fill="#dd5919"></path>
+      <path
+        d="M9.339 1.4h59.54a8.114 8.114 0 018.114 8.114v64.972a8.114 8.114 0 01-8.114 8.114H9.339a8.114 8.114 0 01-8.114-8.114V9.515A8.114 8.114 0 019.339 1.4z"
+        fill="#f68958"></path>
+      <g transform="translate(8.4 8.4)" fill="#ffba00">
+        <circle cx="3.5" cy="3.5" r="3.5"></circle>
+        <circle cx="3.5" cy="3.5" r="3.5" transform="translate(60.2)"></circle>
+        <circle cx="3.5" cy="3.5" r="3.5" transform="translate(0 60.2)"></circle>
+        <circle cx="3.5" cy="3.5" r="3.5" transform="translate(60.2 60.2)"></circle>
+        <path
+          d="M58.8 13.767v11.676a2.808 2.808 0 01-.826 1.988l-5.348 5.348a2.809 2.809 0 01-1.988.826h-4.671a2.809 2.809 0 00-1.988.826l-1.148 1.148a2.809 2.809 0 00-.826 1.988v4.438a2.808 2.808 0 01-2.8 2.8h-14v-7.238a2.809 2.809 0 01.826-1.988l8.148-8.148a2.809 2.809 0 011.988-.826h7.238a2.808 2.808 0 002.8-2.8v-4.438a2.809 2.809 0 00-.826-1.988l-1.148-1.148a2.809 2.809 0 00-1.988-.826H24.967a2.808 2.808 0 00-1.988.826l-1.148 1.148a2.809 2.809 0 00-.826 1.988v3.038a2.808 2.808 0 01-2.8 2.8h-5.6a2.808 2.808 0 01-2.8-2.8v-8.643a2.808 2.808 0 01.826-1.988l5.348-5.348a2.809 2.809 0 011.988-.826h32.676a2.809 2.809 0 011.988.826l5.348 5.348a2.808 2.808 0 01.821 1.993zM28 51.8h11.2a2.8 2.8 0 012.8 2.8v5.6a2.8 2.8 0 01-2.8 2.8H28a2.8 2.8 0 01-2.8-2.8v-5.6a2.8 2.8 0 012.8-2.8z">
+        </path>
+      </g>
+      <path
+        d="M61.6 22.167v11.676a2.808 2.808 0 01-.826 1.988l-5.348 5.348a2.809 2.809 0 01-1.988.826h-4.671a2.809 2.809 0 00-1.988.826l-1.148 1.148a2.809 2.809 0 00-.826 1.988v4.438a2.808 2.808 0 01-2.8 2.8h-8.4v-7.238a2.809 2.809 0 01.826-1.988l8.148-8.148a2.809 2.809 0 011.988-.826h7.238a2.808 2.808 0 002.8-2.8v-4.438a2.809 2.809 0 00-.826-1.988l-1.148-1.148a2.809 2.809 0 00-1.988-.826H27.767a2.809 2.809 0 00-1.988.826l-1.148 1.148a2.808 2.808 0 00-.826 1.988v3.038a2.8 2.8 0 01-5.6 0v-8.643a2.808 2.808 0 01.826-1.988l5.348-5.348A2.809 2.809 0 0126.367 14h27.076a2.809 2.809 0 011.988.826l5.348 5.348a2.809 2.809 0 01.826 1.988zM36.4 60.2H42a2.8 2.8 0 012.8 2.8v5.6a2.8 2.8 0 01-2.8 2.8h-5.6a2.8 2.8 0 01-2.8-2.8V63a2.8 2.8 0 012.8-2.8z"
+        fill="#ffc500"></path>
+      <path
+        d="M74.2 0H9.8A9.811 9.811 0 000 9.8v64.4A9.811 9.811 0 009.8 84h64.4a9.811 9.811 0 009.8-9.8V9.8A9.811 9.811 0 0074.2 0zm7 74.2a7.008 7.008 0 01-7 7H9.8a7.008 7.008 0 01-7-7V9.8a7.008 7.008 0 017-7h64.4a7.008 7.008 0 017 7z">
+      </path>
+      <path
+        d="M11.9 16.8A4.9 4.9 0 107 11.9a4.9 4.9 0 004.9 4.9zm0-7a2.1 2.1 0 11-2.1 2.1 2.1 2.1 0 012.1-2.1zM72.1 7a4.9 4.9 0 104.9 4.9A4.9 4.9 0 0072.1 7zm0 7a2.1 2.1 0 112.1-2.1 2.1 2.1 0 01-2.1 2.1zM11.9 67.2a4.9 4.9 0 104.9 4.9 4.9 4.9 0 00-4.9-4.9zm0 7a2.1 2.1 0 112.1-2.1 2.1 2.1 0 01-2.1 2.1zm60.2-7a4.9 4.9 0 104.9 4.9 4.9 4.9 0 00-4.9-4.9zm0 7a2.1 2.1 0 112.1-2.1 2.1 2.1 0 01-2.1 2.1zm-3.5-40.36V22.16a4.172 4.172 0 00-1.23-2.97l-5.36-5.36a4.172 4.172 0 00-2.97-1.23H26.36a4.172 4.172 0 00-2.97 1.23l-5.36 5.36a4.172 4.172 0 00-1.23 2.97v8.64A4.2 4.2 0 0021 35h5.6a4.2 4.2 0 004.2-4.2v-3.04a1.392 1.392 0 01.41-.991l1.159-1.159a1.392 1.392 0 01.99-.41h17.28a1.392 1.392 0 01.991.41l1.159 1.159a1.392 1.392 0 01.41.991v4.44a1.4 1.4 0 01-1.4 1.4h-7.24a4.172 4.172 0 00-2.97 1.23l-8.159 8.159a4.172 4.172 0 00-1.23 2.97v7.24a1.416 1.416 0 001.531 1.394q.064.006.131.006H47.6a4.2 4.2 0 004.2-4.2v-4.44a1.392 1.392 0 01.41-.991l1.159-1.159a1.392 1.392 0 01.99-.41h4.68a4.172 4.172 0 002.97-1.23l5.359-5.359a4.169 4.169 0 001.23-2.97zm-2.8 0a1.392 1.392 0 01-.41.991l-5.359 5.359a1.392 1.392 0 01-.991.41h-4.68a4.172 4.172 0 00-2.97 1.23l-1.159 1.159a4.172 4.172 0 00-1.23 2.97v4.44a1.4 1.4 0 01-1.4 1.4H35v-5.84a1.392 1.392 0 01.41-.991l8.159-8.159a1.392 1.392 0 01.991-.41h7.24a4.2 4.2 0 004.2-4.2V27.76a4.172 4.172 0 00-1.23-2.97l-1.16-1.16a4.172 4.172 0 00-2.97-1.23H33.36a4.172 4.172 0 00-2.97 1.23l-1.16 1.16A4.172 4.172 0 0028 27.76v3.04a1.4 1.4 0 01-1.4 1.4H21a1.4 1.4 0 01-1.4-1.4v-8.64a1.392 1.392 0 01.41-.991l5.359-5.359a1.392 1.392 0 01.99-.41h32.68a1.392 1.392 0 01.991.41l5.359 5.359a1.392 1.392 0 01.41.991v11.68zM47.6 58.8H36.4a4.2 4.2 0 00-4.2 4.2v5.6a4.2 4.2 0 004.2 4.2h11.2a4.2 4.2 0 004.2-4.2V63a4.2 4.2 0 00-4.2-4.2zm1.4 9.8a1.4 1.4 0 01-1.4 1.4H36.4a1.4 1.4 0 01-1.4-1.4V63a1.4 1.4 0 011.4-1.4h11.2A1.4 1.4 0 0149 63z">
+      </path>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74.176 74.176" id="profile-img">
+      <circle cx="36.382" cy="36.382" r="36.382" fill="#ec927b" transform="translate(.706 .706)"></circle>
+      <path
+        d="M37.088 2.823a36.418 36.418 0 0136.355 35.324c.01-.353.027-.7.027-1.059a36.382 36.382 0 10-72.764 0c0 .355.017.706.027 1.059A36.418 36.418 0 0137.088 2.823z"
+        fill="#fff"></path>
+      <path
+        d="M22.56 27.237a10.5 10.5 0 011.777-5.592 13.64 13.64 0 015.172-4.693 16.276 16.276 0 017.928-1.86 16.946 16.946 0 017.438 1.553 12.07 12.07 0 014.983 4.228 10.371 10.371 0 011.758 5.811 8.979 8.979 0 01-1 4.329 13.28 13.28 0 01-2.382 3.21q-1.381 1.35-4.954 4.547a20.246 20.246 0 00-1.584 1.584 6.454 6.454 0 00-.887 1.249 6.106 6.106 0 00-.45 1.133q-.16.567-.479 1.99a3.234 3.234 0 01-3.458 3.022 3.532 3.532 0 01-2.542-.987 3.881 3.881 0 01-1.032-2.934 10.306 10.306 0 012.76-7.366 45.86 45.86 0 013.371-3.21q1.859-1.627 2.688-2.455a8.31 8.31 0 001.4-1.846 4.458 4.458 0 00.566-2.208 5.137 5.137 0 00-1.728-3.923 6.316 6.316 0 00-4.461-1.6 6.172 6.172 0 00-4.707 1.612 12.855 12.855 0 00-2.557 4.751q-.988 3.284-3.748 3.283a3.684 3.684 0 01-2.746-1.148 3.5 3.5 0 01-1.12-2.484zm13.977 22.906a4.369 4.369 0 104.369 4.37 4.369 4.369 0 00-4.369-4.37z"
+        fill="#fff"></path>
+      <g fill="#3a2c60">
+        <path
+          d="M58.458 65.639a35.38 35.38 0 01-2.72 1.852.706.706 0 00.741 1.2c.967-.6 1.919-1.243 2.828-1.925a.706.706 0 00-.848-1.13z">
+        </path>
+        <path
+          d="M37.088 0a37.088 37.088 0 000 74.176 36.7 36.7 0 0015.581-3.433.707.707 0 00-.6-1.281 35.286 35.286 0 01-14.986 3.3 35.676 35.676 0 1135.681-35.674 35.35 35.35 0 01-11.2 25.932.706.706 0 00.969 1.026 36.743 36.743 0 0011.643-26.958A37.13 37.13 0 0037.088 0z">
+        </path>
+        <path
+          d="M43.748 39.299c2.376-2.125 4.05-3.662 4.976-4.569a14.026 14.026 0 002.511-3.38 9.724 9.724 0 001.087-4.665 11.113 11.113 0 00-1.875-6.2 12.821 12.821 0 00-5.266-4.476 17.721 17.721 0 00-7.745-1.624 17.044 17.044 0 00-8.271 1.947 14.4 14.4 0 00-5.43 4.937 11.233 11.233 0 00-1.881 5.97 4.2 4.2 0 001.319 2.977 4.381 4.381 0 003.251 1.362c1.5 0 3.483-.657 4.419-3.766a12.236 12.236 0 012.4-4.492 5.544 5.544 0 014.192-1.389 5.59 5.59 0 013.983 1.408 4.422 4.422 0 011.5 3.4 3.735 3.735 0 01-.477 1.865 7.638 7.638 0 01-1.278 1.69c-.545.545-1.438 1.361-2.654 2.424a46.935 46.935 0 00-3.424 3.263 11.009 11.009 0 00-2.947 7.845 4.567 4.567 0 001.249 3.444 4.231 4.231 0 003.031 1.184 3.911 3.911 0 004.147-3.573c.208-.927.366-1.584.469-1.953a5.5 5.5 0 01.4-1 5.793 5.793 0 01.789-1.106 19.226 19.226 0 011.524-1.523zm-2.588.594a7.056 7.056 0 00-.982 1.391 6.843 6.843 0 00-.5 1.265 44.207 44.207 0 00-.493 2.055c-.309 1.69-1.161 2.442-2.763 2.442a2.823 2.823 0 01-2.054-.791 3.191 3.191 0 01-.813-2.425 9.6 9.6 0 012.57-6.891 45.771 45.771 0 013.316-3.159c1.238-1.083 2.155-1.92 2.722-2.487a9.08 9.08 0 001.513-2 5.174 5.174 0 00.654-2.554 5.844 5.844 0 00-1.956-4.442 7.028 7.028 0 00-4.939-1.784 6.86 6.86 0 00-5.222 1.836 13.621 13.621 0 00-2.718 5.031c-.751 2.492-2.112 2.78-3.073 2.78a2.979 2.979 0 01-2.24-.935 2.809 2.809 0 01-.919-1.991 9.861 9.861 0 011.667-5.215 13.014 13.014 0 014.911-4.448 15.656 15.656 0 017.589-1.773 16.322 16.322 0 017.132 1.484 11.434 11.434 0 014.7 3.981 9.717 9.717 0 011.642 5.423 8.34 8.34 0 01-.918 3.995 12.654 12.654 0 01-2.255 3.041c-.912.892-2.57 2.415-4.935 4.53a21.078 21.078 0 00-1.639 1.641zm-4.629 9.544a5.075 5.075 0 105.075 5.075 5.081 5.081 0 00-5.075-5.075zm0 8.739a3.663 3.663 0 113.663-3.664 3.667 3.667 0 01-3.663 3.664z">
+        </path>
+      </g>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.065 29.623" id="star">
+      <path
+        d="M30.331 10.701l-10.062-.933-4-9.281a.806.806 0 00-1.481 0l-4 9.281-10.055.933a.806.806 0 00-.458 1.409l7.592 6.669-2.222 9.858a.806.806 0 001.2.871l8.689-5.159 8.689 5.159a.806.806 0 001.2-.871L23.2 18.779l7.592-6.669a.806.806 0 00-.461-1.409z"
+        fill="#ffdc64"></path>
+      <path
+        d="M16.273.487a.806.806 0 00-1.481 0l-4 9.281-10.059.933a.806.806 0 00-.458 1.409l7.592 6.669-2.222 9.858a.806.806 0 001.2.871l1.939-1.152a35.562 35.562 0 019.466-23.28z"
+        fill="#ffc850"></path>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.571 37.571" id="x">
+      <path d="M18.785 0A18.785 18.785 0 110 18.785 18.785 18.785 0 0118.785 0z" fill="#f88379"></path>
+      <path d="M37.444 20.936L26.997 10.489 11.025 27.053l10.341 10.341a18.789 18.789 0 0016.078-16.458z"
+        fill="#e87b71"></path>
+      <g fill="#fff">
+        <path
+          d="M26.005 27.263a1.464 1.464 0 01-1.038-.43L10.744 12.61a1.467 1.467 0 012.075-2.075l14.223 14.223a1.467 1.467 0 01-1.038 2.5z">
+        </path>
+        <path
+          d="M11.781 27.264a1.467 1.467 0 01-1.038-2.5l14.223-14.223a1.467 1.467 0 012.075 2.075L12.818 26.839a1.463 1.463 0 01-1.037.425z">
+        </path>
+      </g>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" id="checked">
+      <path d="M20 0A20 20 0 110 20 19.943 19.943 0 0119.886 0z" fill="#6ee85e"></path>
+      <path d="M31.08 14.489l-14.2 14.2-7.955-7.9 3.239-3.182 4.716 4.659L27.846 11.3z" fill="#fff"></path>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 476 259.618" id="logo-black"><text
+        transform="translate(0 232.617)" font-size="115" font-family="FredokaOne-Regular, Fredoka One">
+        <tspan x="0" y="0">PSYCHIC</tspan>
+      </text>
+      <path
+        d="M238.954 24.993a6.941 6.941 0 10-4.909-2.035 6.941 6.941 0 004.909 2.035zm-22.902-4.161a6.944 6.944 0 10-4.909-2.035 6.944 6.944 0 004.909 2.035zm-22.902-6.94a6.944 6.944 0 10-4.909-2.035 6.944 6.944 0 004.909 2.035zm68.711 6.94a6.944 6.944 0 10-4.909-2.035 6.944 6.944 0 004.909 2.035zm22.902-6.94a6.944 6.944 0 10-4.909-2.035 6.944 6.944 0 004.909 2.035z">
+      </path>
+      <path
+        d="M343.452 25.267a2.108 2.108 0 00-1.825-.523 376.658 376.658 0 01-65.72 4.818 63.513 63.513 0 00-34 9.918l-2.567 1.6-2.567-1.6a63.513 63.513 0 00-34-9.918 389.8 389.8 0 01-66.485-4.815 2.08 2.08 0 00-2.461 2.324 168.144 168.144 0 0012.823 43.04c13.173 28.566 32.572 43.667 56.1 43.667a66.61 66.61 0 0034.111-8.212l2.461-1.442 2.461 1.442a66.61 66.61 0 0034.111 8.212c23.234 0 42.417-15.1 55.471-43.673a170.047 170.047 0 0012.732-43.044 2.09 2.09 0 00-.642-1.794zM228.558 83.838a5.2 5.2 0 01-3.914 2.312c-.374.03-9.414.751-27.41.751-21.54 0-31.528-30.333-31.936-31.632a5.207 5.207 0 014.958-6.8h26.987c21.507 0 31.513 29.591 31.936 30.85a5.21 5.21 0 01-.62 4.517zm84.068-28.56c-.414 1.29-10.4 31.632-31.936 31.632-18 0-27.036-.721-27.41-.751a5.2 5.2 0 01-4.52-6.819c.417-1.259 10.423-30.85 31.936-30.85h26.984a5.2 5.2 0 014.955 6.8z">
+      </path>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 344 344" id="logo-dark-bg">
+      <g transform="translate(1495 -869)">
+        <rect width="344" height="344" rx="36" transform="translate(-1495 869)" fill="#4c5d70"></rect>
+        <g transform="translate(-1474.942 940.207)" fill="#fff">
+          <path
+            d="M151.938 36.104a10.031 10.031 0 10-7.092-2.939 10.107 10.107 0 007.092 2.939zm-33.097-6.017a10.033 10.033 0 10-7.092-2.94 10.1 10.1 0 007.092 2.94zM85.745 20.059a10.033 10.033 0 10-7.092-2.94 10.09 10.09 0 007.092 2.94zm99.289 10.028a10.033 10.033 0 10-7.092-2.94 10.1 10.1 0 007.092 2.94zm33.096-10.028a10.033 10.033 0 10-7.092-2.94 10.088 10.088 0 007.092 2.94z">
+          </path>
+          <path
+            d="M302.932 36.498a3.045 3.045 0 00-2.657-.756c-.34.066-35.711 6.963-94.97 6.963a91.774 91.774 0 00-49.134 14.334l-3.711 2.31-3.711-2.31a91.775 91.775 0 00-49.132-14.331c-59.4 0-95.677-6.9-96.036-6.969a3.007 3.007 0 00-3.554 3.359 242.965 242.965 0 0018.53 62.2c19.034 41.28 47.065 63.1 81.061 63.1 19.268 0 35.852-4 49.289-11.888l3.555-2.085 3.556 2.085c13.436 7.888 30.02 11.888 49.289 11.888 33.573 0 61.29-21.821 80.153-63.106a245.719 245.719 0 0018.4-62.2 3.017 3.017 0 00-.928-2.594zm-166.018 84.635a7.519 7.519 0 01-5.657 3.342c-.542.044-13.6 1.087-39.606 1.087-31.126 0-45.56-43.832-46.16-45.7a7.522 7.522 0 017.162-9.822h39c31.079 0 45.537 42.759 46.138 44.58a7.529 7.529 0 01-.877 6.513zm121.476-41.27c-.6 1.865-15.032 45.7-46.155 45.7-26 0-39.065-1.043-39.608-1.087a7.522 7.522 0 01-6.53-9.854c.6-1.819 15.061-44.579 46.139-44.579h38.994a7.521 7.521 0 017.16 9.822z">
+          </path>
+          <ellipse cx="14.5" cy="14" rx="14.5" ry="14" transform="translate(137.942 174.793)"></ellipse>
+        </g>
+      </g>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 476 259.618" id="logo-white">
+      <g fill="#fff"><text transform="translate(0 232.618)" font-size="115"
+          font-family="FredokaOne-Regular, Fredoka One">
+          <tspan x="0" y="0">PSYCHIC</tspan>
+        </text>
+        <path
+          d="M238.954 24.993a6.941 6.941 0 10-4.909-2.035 6.941 6.941 0 004.909 2.035zm-22.902-4.161a6.944 6.944 0 10-4.909-2.035 6.944 6.944 0 004.909 2.035zm-22.902-6.94a6.944 6.944 0 10-4.909-2.035 6.944 6.944 0 004.909 2.035zm68.711 6.94a6.944 6.944 0 10-4.909-2.035 6.944 6.944 0 004.909 2.035zm22.902-6.94a6.944 6.944 0 10-4.909-2.035 6.944 6.944 0 004.909 2.035z">
+        </path>
+        <path
+          d="M343.452 25.267a2.108 2.108 0 00-1.825-.523 376.658 376.658 0 01-65.72 4.818 63.513 63.513 0 00-34 9.918l-2.567 1.6-2.567-1.6a63.513 63.513 0 00-34-9.918 389.8 389.8 0 01-66.485-4.815 2.08 2.08 0 00-2.461 2.324 168.144 168.144 0 0012.823 43.04c13.173 28.566 32.572 43.667 56.1 43.667a66.61 66.61 0 0034.111-8.212l2.461-1.442 2.461 1.442a66.61 66.61 0 0034.111 8.212c23.234 0 42.417-15.1 55.471-43.673a170.047 170.047 0 0012.732-43.044 2.09 2.09 0 00-.642-1.794zM228.558 83.838a5.2 5.2 0 01-3.914 2.312c-.374.03-9.414.751-27.41.751-21.54 0-31.528-30.333-31.936-31.632a5.207 5.207 0 014.958-6.8h26.987c21.507 0 31.513 29.591 31.936 30.85a5.21 5.21 0 01-.62 4.517zm84.068-28.56c-.414 1.29-10.4 31.632-31.936 31.632-18 0-27.036-.721-27.41-.751a5.2 5.2 0 01-4.52-6.819c.417-1.259 10.423-30.85 31.936-30.85h26.984a5.2 5.2 0 014.955 6.8z">
+        </path>
+      </g>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.667 37.667" id="luck">
+      <g fill="#6ee85e">
+        <path
+          d="M33.428 27.411c-5.074 0-14.6-8.3-14.6-8.573a.006.006 0 010-.005.006.006 0 010-.005c0-.268 9.523-8.573 14.6-8.573a4.013 4.013 0 014.239 4.164 6.25 6.25 0 01-2.7 4.414 6.25 6.25 0 012.7 4.414 4.013 4.013 0 01-4.239 4.164z">
+        </path>
+        <path
+          d="M4.239 27.411c5.074 0 14.6-8.3 14.6-8.573a.006.006 0 000-.005.006.006 0 000-.005c0-.268-9.523-8.573-14.6-8.573A4.013 4.013 0 000 14.419a6.25 6.25 0 002.7 4.414A6.25 6.25 0 000 23.247a4.013 4.013 0 004.239 4.164z">
+        </path>
+        <path
+          d="M27.411 33.428a4.013 4.013 0 01-4.164 4.238 6.247 6.247 0 01-4.413-2.7 6.25 6.25 0 01-4.414 2.7 4.013 4.013 0 01-4.164-4.238c0-5.074 8.305-14.6 8.573-14.6h.005c.272.003 8.577 9.526 8.577 14.6z">
+        </path>
+        <path
+          d="M27.411 33.428a4.013 4.013 0 01-4.164 4.238 6.247 6.247 0 01-4.413-2.7V18.833c.272-.002 8.577 9.521 8.577 14.595z">
+        </path>
+        <path
+          d="M27.411 4.238c0 5.074-8.305 14.6-8.573 14.6h-.005c-.268 0-8.573-9.523-8.573-14.6A4.013 4.013 0 0114.419 0a6.25 6.25 0 014.414 2.7A6.247 6.247 0 0123.247 0a4.013 4.013 0 014.164 4.238z">
+        </path>
+        <path d="M27.411 4.238c0 5.074-8.305 14.6-8.573 14.6V2.7A6.247 6.247 0 0123.247 0a4.013 4.013 0 014.164 4.238z">
+        </path>
+      </g>
+    </symbol>
+  </svg>
+</body>
+<script>
+    let introPage = document.querySelector(".intro-page-container");
+let instructionPage = document.querySelector(".instructions-page-container");
+let mainPage = document.querySelector(".max");
+let gotItBtn = document.querySelector(".got-it-btn");
+let startBtn = document.querySelector(".start-btn");
+
+gotItBtn.addEventListener("click", function () {
+  introPage.style.display = "none";
+  instructionPage.style.display = "flex";
+});
+
+startBtn.addEventListener("click", function () {
+  instructionPage.style.display = "none";
+  mainPage.style.display = "block";
+});
+
+let upTo = 20;
+let score = 100;
+let highScore = 0;
+let secretNumber = Math.ceil(Math.random() * upTo);
+let front = document.querySelector(".front");
+let back = document.querySelector(".back");
+let hiddenNumber = document.querySelector(".hidden-number");
+let userGuess = document.querySelector(".user-guess-input");
+let checkBtn = document.querySelector(".check-btn");
+let resetBtn = document.querySelector(".reset-btn");
+let messageIcon = document.querySelector(".message-icon-use");
+let messageText = document.querySelector(".message-text");
+let tryAgainPage = document.querySelector(".try-again-page-container");
+let tryAgainBtn = document.querySelector(".try-again-btn");
+let defaultMessage = "Good Luck!";
+let winMessage = "Correct !";
+let tryHigherMessage = "Try Higher Number !";
+let tryLowerMessage = "Try Lower Number!";
+let looseMessage = "You Lost!";
+let minMaxMessage = "Enter Number From ( 1 - 20 )";
+
+hiddenNumber.textContent = secretNumber;
+
+checkBtn.addEventListener("click", function () {
+  if (userGuess.value > upTo || userGuess.value <= 0) {
+    messageIcon.setAttribute("href", "#x");
+    messageText.textContent = minMaxMessage;
+    messageText.style.color = "#f76d61";
+  } else if (userGuess.value == secretNumber) {
+    back.style.opacity = "1";
+    front.style.opacity = "0";
+    messageText.textContent = winMessage;
+    messageIcon.setAttribute("href", "#checked");
+    messageText.style.color = "#5ae548";
+    mainPage.style.background = "linear-gradient(to bottom,#2AF598,#01EBE3)";
+    if (score > highScore) {
+      highScore = score;
+      document.querySelector(".high-score").textContent = highScore;
+    }
+  } else if (userGuess.value > secretNumber) {
+    if (score > 10) {
+      messageText.textContent = tryLowerMessage;
+      messageIcon.setAttribute("href", "#x");
+      score -= 10;
+      document.querySelector(".score").textContent = score;
+      messageText.style.color = "#f76d61";
+      mainPage.style.background = "#FB8085";
+    } else {
+      messageIcon.setAttribute("href", "#x");
+      messageText.textContent = looseMessage;
+      tryAgainPage.style.display = "flex";
+      mainPage.style.display = "none";
+    }
+  } else if (userGuess.value < secretNumber) {
+    if (score > 10) {
+      messageText.textContent = tryHigherMessage;
+      messageIcon.setAttribute("href", "#x");
+      score -= 10;
+      document.querySelector(".score").textContent = score;
+      messageText.style.color = "#f76d61";
+      mainPage.style.background = "#f8a087";
+    } else {
+      messageIcon.setAttribute("href", "#x");
+      messageText.textContent = looseMessage;
+      tryAgainPage.style.display = "flex";
+      mainPage.style.display = "none";
+    }
+  }
+});
+
+resetBtn.addEventListener("click", function () {
+  score = 100;
+  secretNumber = Math.ceil(Math.random() * upTo);
+  messageIcon.setAttribute("href", "#luck");
+  document.querySelector(".score").textContent = "...";
+  userGuess.value = "";
+  messageText.textContent = defaultMessage;
+  front.style.opacity = "1";
+  back.style.opacity = "0";
+  hiddenNumber.textContent = secretNumber;
+  messageText.style.color = "#5ae548";
+  mainPage.style.background = "linear-gradient(to bottom,#FB8085,#f8a087)";
+});
+
+tryAgainBtn.addEventListener("click", function () {
+  score = 100;
+  secretNumber = Math.ceil(Math.random() * upTo);
+  messageIcon.setAttribute("href", "#luck");
+  document.querySelector(".score").textContent = "...";
+  userGuess.value = "";
+  messageText.textContent = defaultMessage;
+  front.style.opacity = "1";
+  back.style.opacity = "0";
+  hiddenNumber.textContent = secretNumber;
+  tryAgainPage.style.display = "none";
+  mainPage.style.display = "block";
+  messageText.style.color = "#5ae548";
+  mainPage.style.background = "linear-gradient(to bottom,#FB8085,#f8a087)";
+});
+
+</script>
+<style>
+  
+
+/**** Design and Code by 
+Dawit Lee. ****/
+
+
+/* CSS Compiled using Sass */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: normal;
+}
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: "Fredoka One", Arial, Helvetica, sans-serif;
+  height: 100vh;
+  background: #fb8085;
+}
+.logo {
+  width: 10rem;
+  height: 10rem;
+  margin-top: -10rem;
+}
+.btn {
+  font-size: 2rem;
+  font-family: inherit;
+  padding: 0.6rem 1.6rem;
+  border-radius: 0.6rem;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+  -webkit-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  outline: none;
+}
+.btn:hover,
+.btn:focus {
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+.btn:active {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+.intro-page-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    from(#fb8085),
+    to(#f8a087)
+  );
+  background: linear-gradient(to top, #fb8085, #f8a087);
+  width: 100%;
+  height: 100%;
+}
+.intro-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #fff;
+  padding: 2.3rem 0;
+  width: 75%;
+  max-width: 50rem;
+  border-radius: 2.8rem;
+}
+.credit {
+  font-size: 2.1rem;
+  margin-bottom: 1rem;
+  color: #fb8085;
+}
+.profile-img-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 7rem;
+  height: 7rem;
+  margin: 1rem 0 0 0;
+  border: 1px solid #5e5656;
+  border-radius: 50%;
+}
+.profile-img {
+  width: 94%;
+  height: 94%;
+}
+.profile-name {
+  font-size: 1.8rem;
+  color: #3e3939;
+  margin: 0.7rem 0 2rem 0;
+}
+.got-it-btn {
+  background: #5ae548;
+  padding: 1rem 1.6rem;
+}
+.instructions-page-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    from(#fb8085),
+    to(#f8a087)
+  );
+  background: linear-gradient(to top, #fb8085, #f8a087);
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.instructions-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 90%;
+  max-width: 40rem;
+  background: #fff;
+  border-radius: 2.8rem;
+  padding: 3rem 0;
+}
+.instructions-title {
+  color: #fb8085;
+  font-size: 2.8rem;
+  margin-bottom: 3rem;
+}
+.instructions {
+  color: #3e3939;
+}
+.instructions h3 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+.start-btn {
+  background: #5ae548;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+}
+.max {
+  max-width: 50rem;
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#fb8085),
+    to(#f8a087)
+  );
+  background: linear-gradient(to bottom, #fb8085, #f8a087);
+  overflow: auto;
+  display: none;
+}
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+#logo {
+  margin: 2rem 0 2rem 0;
+  width: auto;
+  height: 5rem;
+}
+.screen {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 60%;
+  height: 12rem;
+  border-radius: 1rem;
+  margin-bottom: 4rem;
+  position: relative;
+  background: #fff;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+}
+.front,
+.back {
+  position: absolute;
+}
+.mystery-box {
+  width: 7rem;
+  height: 7rem;
+  opacity: 1;
+}
+.back {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.hidden-number-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 7rem;
+  height: 7rem;
+}
+.hidden-number {
+  font-size: 6rem;
+  color: #475463;
+}
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #fff;
+}
+.input-label {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.137);
+}
+.user-guess-input {
+  text-align: center;
+  border: 0.1px solid #475463;
+  border-radius: 40rem;
+  width: 35%;
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  -webkit-transition: width 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: width 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  outline: none;
+  margin-bottom: 2rem;
+  -webkit-box-shadow: #ccdbe8 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  box-shadow: #ccdbe8 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  color: #3e3939;
+}
+.user-guess-input:hover,
+.user-guess-input:focus {
+  width: 40%;
+}
+.btn-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 1rem 0 2rem 0;
+}
+.check-btn {
+  background: #5ae548;
+  margin-right: 1.6rem;
+}
+.check-btn:hover,
+.check-btn:focus {
+  background-color: #46e232;
+}
+.reset-btn {
+  background: #f76d61;
+}
+.reset-btn:hover,
+.reset-btn:focus {
+  background-color: #f65749;
+}
+.message-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+  background: #475463;
+  padding: 1.6rem 0;
+}
+.message-icon-svg {
+  width: 2.6rem;
+  height: 2.6rem;
+  margin-right: 1rem;
+}
+.message-text {
+  color: #5ae548;
+  font-size: 1.6rem;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.137);
+}
+.footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 60%;
+  margin: 4rem auto 0 auto;
+}
+.footer svg {
+  width: 3.2rem;
+  height: 3.2rem;
+  margin-right: 1rem;
+}
+.score-container,
+.high-score-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.137);
+}
+.label-high-score,
+.label-score {
+  color: #fff;
+  font-size: 1.6rem;
+}
+.score,
+.high-score {
+  color: #fff;
+  font-size: 2rem;
+  margin-left: auto;
+}
+.try-again-page-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    from(#f37368),
+    to(#f76d61)
+  );
+  background: linear-gradient(to top, #f37368, #f76d61);
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.try-again-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 90%;
+  max-width: 50rem;
+  background: #fff;
+  border-radius: 2.8rem;
+  padding: 3rem 0;
+}
+.try-again-title {
+  color: #f76d61;
+  font-size: 4rem;
+  margin-bottom: 3rem;
+}
+.score0 {
+  font-size: 2.6rem;
+  margin-bottom: 3rem;
+  color: #3e3939;
+}
+.try-again-btn {
+  background: #f76d61;
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+}
+</style>
+</html>
