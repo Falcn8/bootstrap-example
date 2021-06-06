@@ -1,0 +1,868 @@
+<!-- Created by Runtime Terror -->
+
+<!DOCTYPE html>
+<!--
+    TANK WAR [GAME]
+    ....####....
+    ....####....
+    ############
+    ##........##
+    ##.######.##
+    ####....####
+-----------------
+    UPDATE      |
+-----------------
+*
+-------------
+    TODO    |
+-------------
+*
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tank IO</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <button class="ctrl-btn" id="btn-shoot">Shoot</button>
+    <button class="ctrl-btn" id="btn-move">Move</button>
+    <button class="ctrl-btn" id="btn-rrot">Rrot</button>
+    <button class="ctrl-btn" id="btn-lrot">Lrot</button>
+    <section id="splash">
+        <h2>Tank IO</h2>
+        <ul>
+            <li id="game-status">Game status: 
+                <b style="color:green">New</b>
+            </li>
+            <li id="game-nextLevel">Next Level:
+                <b style="color:green">1</b>
+            </li>
+            <li>Max Level: <b>5</b></li>
+        </ul>
+        <button id="play-btn">Play</button><br>
+        <footer>
+            <img src=""><br>
+            <p>&copy;RuntimeTerror 2021</p>
+        </footer>
+    </section>
+</body>
+<style>
+/* Created by Runtime Terror */
+
+*{
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    margin: 0;
+    position: fixed;
+}
+
+.ctrl-btn {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, .5);
+    color: silver;
+    border: 1px solid #333;
+    text-align: center;
+}
+
+#splash {
+    position: absolute;
+    color: silver;
+    background-color: rgba(0, 0, 0, .5);
+    text-align: center;
+}
+
+#play-btn {
+    width: 40%;
+    height: 5vh;
+    background-color: teal;
+    outline: none;
+    color: silver;
+    border: 1px solid #333;
+    border-radius: 20px;
+    margin: 5px;
+    transition: 2s;
+}
+
+#play-btn:hover {
+    background-color: royalblue;
+}
+</style>
+<script>
+// Created by Runtime Terror
+
+let player, 
+    canvas, ctx, animationTime,
+    ctrlBtns, splash,
+    spawnNewEnemyTime,
+    enemiesBuffer = [],  
+    enemies = [],
+    bullets = [], 
+    explosions = [],
+    enemiesId = 0;
+
+const DEBUG = false;
+
+const game = {};
+const random = {};
+const collisions = {};
+
+const graphics = {
+    bgFill: "#000",
+    fgFill: "#fff",
+    healthy: "#0f0",
+    normal: "yellow",
+    weak: "#f00",
+    size: 8,
+};
+
+
+/**
+ * Sprites represented as a 2D Array
+ * 0 - empty tile
+ * 1 - solid tile
+ * 2 - solid tile and also bullets origin
+ */
+ const sprites = [
+    [
+        [
+            [0,1,0],
+            [1,2,1],
+            [1,0,1]
+        ],
+
+        [
+            [1,1,0],
+            [0,2,1],
+            [1,1,0]
+        ],
+
+        [
+            [1,0,1],
+            [1,2,1],
+            [0,1,0]
+        ],
+
+        [
+            [0,1,1],
+            [1,2,0],
+            [0,1,1]
+        ],
+    ],
+    // advanced
+    [
+        [
+            [2,0,2],
+            [1,0,1]
+            [1,1,1]
+        ],
+
+        [
+            [1,1,2],
+            [1,0,0],
+            [1,1,2]
+        ],
+
+        [
+            [1,1,1],
+            [1,0,1],
+            [2,0,2]
+        ],
+
+        [
+            [2,1,1],
+            [0,0,1],
+            [2,1,1]
+        ]
+    ],
+
+    [
+        [
+            [2,0,2,0,2,0,2],
+            [1,1,1,0,1,1,1]
+            [2,0,1,1,1,0,2]
+        ],
+        [
+            [2,1,2],
+            [0,1,0],
+            [1,1,2],
+            [0,0,1],
+            [1,1,2],
+            [0,1,0],
+            [2,1,2]
+        ],
+        [
+            [2,0,1,0,1,0,2],
+            [1,1,1,0,1,1,1],
+            [2,0,2,1,2,0,2]
+        ],
+
+        [
+            [2,1,2],
+            [0,1,0],
+            [2,1,1],
+            [0,0,1],
+            [2,1,1],
+            [0,1,0],
+            [2,1,2]
+        ]
+    ]
+];
+
+class Time {
+
+    static defineProperty(obj, name, props) {
+        Object.defineProperty(obj, name, {value:{}})
+        for(const i in props)
+            obj[name][i] = props[i];
+        return obj[name];
+    }
+
+    constructor() {
+        this.t0 = new Date().getTime();
+        this.dt = undefined;
+        this.now = undefined;
+        this.elapsedTime = undefined;
+        this.interval = 0;
+    }
+
+    setInterval(obj, cbName, interval) {
+        this.now = new Date().getTime();
+        if(typeof obj === "object") {
+            if(Math.abs(this.now - this.t0) >= interval) {
+                if(typeof obj[cbName] === "function")
+                    obj[cbName]();
+                this.t0 = this.now;
+            }
+        } else if(typeof obj === "function") {
+            if(Math.abs(this.now - this.t0) >= interval) {
+                // console.log("hry");
+                obj();
+                this.t0 = this.now;
+            }
+        }
+    }
+};
+
+
+class Tank {
+
+    /**
+     * deletes enemies from an array and create a circle like animation
+     * representing an explosion... if the object is a player, the 
+     * transparency equals zero since there's no array to delete them from
+     * @param {Tank} parent object to be exploded
+     */
+    static createExplosion (parent) {
+        for(let i=0; i < 360; i+=45) {
+            let a = i * Math.PI / 180;
+            let x = parent.x + parent.width * .5;
+            let y = parent.y + parent.height * .5;
+            let obj = {a, x, y, l:100, c:parent.color};
+            explosions.push(obj);
+        }
+    }
+
+    /**
+     * @description creates a tank object
+     * @param {String} type type of the tank
+     * @param {Number} x starting position of the tank on the x-axis
+     * @param {Number} y starting position of the tank on the y-axis
+     * 
+     * Type could be any from 
+     * - enemy, bossEnemy, player, bossPlayer
+     * object type simply are the characters, the boss version of their 
+     * type have more health, advanced bullet compared to the regular object
+     */
+    constructor(type, x, y) {
+        this.type = type;
+        this.x = x;
+        this.y = y;
+        this.id = undefined;         // player id is constant to "player"
+        this.bulletType = "normal";  //normal, nitro, bomb
+        this.directions = ["north", "east", "south", "west"]; 
+        this.spriteIndex = 0;
+        this.spriteFrame = 0;
+        this.speed = graphics.size;
+        if(this.type === "player") {
+            this.spriteIndex = 0;
+            this.graphicArray = sprites[this.spriteIndex][this.spriteFrame];
+        }
+        if(this.type === "enemy") {
+            this.spriteIndex = 0;
+            ++this.spriteFrame;
+            this.graphicArray = sprites[this.spriteIndex][++this.spriteFrame];
+        }
+        if(this.type === "bossEnemy" || this.type === "bossPlayer") {
+            this.spriteIndex = 1;
+            if(this.type === "bossEnemy") {
+                ++this.spriteFrame;
+                this.graphicArray = sprites[this.spriteIndex][++this.spriteFrame];
+            }
+            else 
+                this.graphicArray = sprites[this.spriteIndex][this.spriteFrame];
+        }
+        this.width = this.graphicArray[0].length * graphics.size;
+        this.height = this.graphicArray.length * graphics.size;
+        this.transparency = 1;
+        this.health = 100;
+        this.healthColor = "green";
+    }
+
+    setVelocity() {
+        switch(this.currentDirection) {
+            case "north":
+                this.vel = {x:0, y:-this.speed};
+                break;
+            case "east":
+                this.vel = {x:this.speed, y:0};
+                break;
+            case "south":
+                this.vel = {x:0, y:this.speed};
+                break;
+            case "west":
+                this.vel = {x:-this.speed, y:0};
+                break;
+        }
+        this.x += this.vel.x;
+        this.y += this.vel.y;
+    }
+
+    draw() {
+        ctx.save();
+        ctx.globalAlpha = this.transparency;
+        ctx.fillStyle = this.color;
+        ctx.strokeStyle = graphics.bgFill;
+        for(let r=0; r < this.graphicArray.length; r++) {
+            for(let c=0; c < this.graphicArray[r].length; c++) {
+                let id = this.graphicArray[r][c];
+                if(id) {
+                    let x = this.x + c * graphics.size;
+                    let y = this.y + r * graphics.size;
+                    ctx.fillRect(x, y, graphics.size, graphics.size);
+                    ctx.strokeRect(x, y, graphics.size, graphics.size);
+                }
+            }
+        }
+        ctx.restore();
+    }
+
+    explode() {
+        this.transparency = 0;
+        Tank.createExplosion(this);
+        if(this.id !== "player")
+            enemies.splice(enemies.indexOf(this), 1);
+        else {
+            Tank.createExplosion(this);
+            game.status = "over";
+            setTimeout(game.over, 2000);
+        };
+    }
+
+    update() {
+        let currentSprite = sprites[this.spriteIndex];
+
+        // returning rotation of sprite: clamped to the current Sprite
+        if(this.spriteFrame < 0) this.spriteFrame = currentSprite.length - 1;
+        else if(this.spriteFrame >= currentSprite.length) 
+            this.spriteFrame = 0;
+            
+        this.graphicArray = currentSprite[this.spriteFrame];
+        this.currentDirection = this.directions[this.spriteFrame];
+
+        if(this.type !== "player" && this.type !== "bossPlayer") {
+            this.color = this.health >= 60 ? graphics.healthy : 
+                this.health >= 40 && this.health < 60 ? graphics.normal : graphics.weak;
+            
+            // collisions between enemies: prevent overlapping
+            enemies.forEach(e => {
+                if(e !== this) {
+                    if(collisions.rectTorect(e, this)) {
+                        let diffX = e.x - this.x;
+                        let diffY = e.y - this.y;
+                        this.x = diffX < 0 ? e.x - this.width - 5 : e.x + e.width + 5;
+                        this.y = diffY < 0 ? e.y - this.height - 5 : e.y + e.height + 5;
+                    }
+                }
+            })
+
+            this.moveTime.time.setInterval(this, "moveSprite", this.moveTime.interval);
+        } else {
+            this.color = graphics.fgFill;
+            this.healthColor = this.health >= 60 ? graphics.healthy : 
+                this.health >= 40 && this.health < 60 ? graphics.normal : graphics.weak;
+        }
+
+        if(this.health <= 0)  this.explode();
+
+        if(this.x < 0) this.x = canvas.width - this.width;
+        else if(this.x + this.width > canvas.width) this.x = 0;
+        if(this.y < 0) this.y = canvas.height - this.height;
+        else if(this.y + this.height > canvas.height)
+            this.y = 0;
+
+        if(!game.hasStarted) this.vel = {x:0, y:0};
+
+        this.draw();
+        
+    }
+};
+
+
+
+class Enemy extends Tank {
+
+    static spawn() {
+        let enemy = enemiesBuffer.shift();
+        if(enemy) enemies.push(enemy);
+    }
+
+    constructor(type, x, y) {
+        super(type, x, y);
+        this.id = `enemyTank@id=${++enemiesId}`;
+        this.bulletType = this.type === "enemy" ? "normal" : "nitro";
+        this.moveTime = Time.defineProperty(this, "move", {
+            time: new Time(),
+            interval: Math.random() * 4000 + 3200,
+        });
+        if(DEBUG) enemies.push(this);
+        else enemiesBuffer.push(this);
+    }
+
+    moveSprite() {
+        let diffX = player.x - this.x;
+        let diffY = player.y - this.y;
+        let moveTo = random.fromArray(["x", "y"]);
+        if(moveTo === "x") {
+            if(diffX < 0) {
+                this.spriteFrame = 3;
+                this.currentDirection = "west";
+            } else if(diffX > 0) {
+                this.spriteFrame = 1;
+                this.currentDirection = "east";
+            }
+            this.setVelocity();
+            if(this.type !== "enemy") 
+                this.moveTime.interval = Math.random() * 500 + 4800;
+            else this.moveTime.interval = Math.random() * 700 + 5500;
+        } else if(moveTo === "y") {
+            if(diffY < 0) {
+                this.spriteFrame = 0;
+                this.currentDirection = "north";
+            } else if(diffY > 0) {
+                this.spriteFrame = 2;
+                this.currentDirection = "south";
+            }
+            this.bulletType = this.type === "enemy" ? ["normal", "nitro"][Math.floor(Math.random() * 2)]: 
+                ["nitro", "bomb"][Math.floor(Math.random() * 2)];
+            if(game.hasStarted)Bullet.create(this);
+            this.setVelocity();
+            if(this.type !== "enemy")
+                this.moveTime.interval = Math.random() * 500 + 4900;
+            else this.moveTime.interval = Math.random() * 850 + 5200;
+        }
+    }
+};
+
+
+
+
+class Bullet {
+
+    /**
+     * @description - Creates each bullet for a given object
+     * loop through the sprite and create a bullet on every tile 
+     * that has it's [row][col] value equals to 2
+     * @param {Tank} shooter object shooting the bullet
+     * 
+     */
+    static create(shooter) {
+        for(let r=0; r < shooter.graphicArray.length; r++) {
+            for(let c=0; c < shooter.graphicArray[r].length; c++) {
+                let x = shooter.x + c * graphics.size + graphics.size * 0.5;
+                let y = shooter.y + c * graphics.size + graphics.size * 0.5;
+                let id = shooter.graphicArray[r][c];
+                if(id === 2) {
+                    new Bullet(shooter, x, y);
+                }
+            }
+        }
+    }
+
+    /**
+     * 
+     * @param {Tank} shooter object shooting the bullet
+     * @param {Number} x starting position of the bullet on the x-axis
+     * @param {Number} y starting position of the bullet on the y-axis
+     */
+    constructor(shooter, x, y) {
+        this.shooter = shooter;
+        this.x = x;
+        this.y = y;
+        this.type = shooter.bulletType; //normal, nitro, bomb
+        this.r = graphics.size * .5;
+        if(this.type === "normal") {
+            this.speed = random.minMax(100, 150);
+            this.color = "white";
+        } else if(this.type === "nitro") {
+            this.speed = random.minMax(150, 200);
+            this.color = "lightskyblue";
+        } else if(this.type === "bomb") {
+            this.speed = random.minMax(120, 200);
+            this.color = "red";
+        };
+        switch(shooter.currentDirection) {
+            case "north":
+                this.vel = {x:0, y:-this.speed};
+                break;
+            case "east":
+                this.vel = {x:this.speed, y:0};
+                break;
+            case "south":
+                this.vel = {x:0, y:this.speed};
+                break;
+            case "west":
+                this.vel = {x:-this.speed, y:0};
+                break;
+        };
+        this.delete = function() {
+            bullets.splice(bullets.indexOf(this), 1);
+        };
+        bullets.push(this);
+    }
+
+    update() {
+
+        // delete bullets if they're on off-canvas
+        if(this.x - this.r < 0 || this.x + this.r > canvas.width 
+            || this.y - this.r < 0 || this.y + this.r > canvas.height) 
+            this.delete();
+
+        // check for bullets to bullet collision using circle-circle 
+        // collision detection and delete them
+        bullets.forEach((b, i) => {
+            // bullets of the same shooter when collides should not be deleted
+            if(b !== this && b.shooter.id !== this.shooter.id) {
+                if(collisions.circTocirc(b, this)) {
+                    b.delete();
+                    this.delete();
+                }
+            }
+        })
+
+        // reduce characters health when hit by a player bullet
+        if(this.shooter.id === "player") {
+            enemies.forEach(e => {
+                if(collisions.rectToCirc(e, this)) {
+                    if(this.type === "normal" || this.type === "nitro") {
+                        let ductVal = e.type === "bossEnemy" ? 5 : 20;
+                        e.health -= ductVal;
+                    } else if(this.type === "bomb") {
+                        let ductVal = e.type === "bossEnemy" ? 50 : 0;
+                        e.health -= ductVal;
+                    }
+                    this.delete();
+                }
+            });
+        } else {
+            if(collisions.rectToCirc(player, this)) {
+                if(this.type === "normal" || this.type === "nitro") {
+                    let ductVal = player.type === "bossPlayer" ? 5 : 20;
+                    player.health -= ductVal;
+                } else if(this.type === "bomb") {
+                    let ductVal = player.type === "bossPlayer" ? 50 : 0;
+                    player.health -= ductVal;
+                }
+                this.delete();
+            }
+        }
+        // move bullets per time
+        this.x += this.vel.x * animationTime.dt;
+        this.y += this.vel.y * animationTime.dt;
+
+        // draw the bullet
+        ctx.save();
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.translate(this.x, this.y);
+        ctx.scale(.5, .5);
+        ctx.arc(0, 0, this.r, 0, 2*Math.PI);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+    }
+};
+
+
+game.init = () => {
+    const [WIDTH, HEIGHT] = [
+        Math.min(innerWidth, 420), 
+        Math.min(innerHeight, 580)
+    ];
+    canvas.width = WIDTH;
+    canvas.height = HEIGHT;
+    let offset = {x:innerWidth/2 - WIDTH/2, y:innerHeight/2 - HEIGHT/2};
+    canvas.style.backgroundColor = graphics.bgFill;
+    canvas.style.position = "absolute";
+    canvas.style.left = `${offset.x}px`;
+    canvas.style.top = `${offset.y}px`;
+
+    splash.style.width = `${canvas.width}px`;
+    splash.style.height = `${canvas.height - 100}px`;
+    splash.style.left = `${offset.x}px`;
+    splash.style.top = `${offset.y + 100}px`;
+
+    const margin = 5;
+    const btnSize = 50 + margin;
+    let btnPos = [
+        {
+            x: offset.x + margin,
+            y: offset.y + HEIGHT - (btnSize * 2)
+        },{
+            x: offset.x + margin,
+            y: offset.y + HEIGHT - (btnSize * 1)
+        },
+        {
+            x: offset.x + WIDTH - btnSize,
+            y: offset.y + HEIGHT - (btnSize * 1)
+        },
+        {
+            x: offset.x + WIDTH - btnSize*2,
+            y: offset.y + HEIGHT - (btnSize * 1)
+        },
+    ];
+
+    ctrlBtns.forEach((b,i) => {
+        b.style.left = `${btnPos[i].x}px`;
+        b.style.top = `${btnPos[i].y}px`;
+    });
+};
+
+game.currentLevel = 0;
+game.maxLevel = 5;
+game.hasStarted = false;
+game.hasOver = false;
+
+game.createLevel = () => {
+    const enemies = 10 * game.currentLevel;
+    const boss =  1 * game.currentLevel;
+    const random = game.currentLevel === 1 ? "no" : "yes";
+    let counter = 0;
+    if(random === "no") {
+        for(let i=0; i < enemies; ++i) {
+            let g = new Enemy("enemy", 0, 0);
+            g.x = Math.random() * (canvas.width - g.width);
+        }
+    } else {
+        enemiesBuffer = new Array(enemies+boss).fill(0);
+        while (counter < boss) {
+            let i = Math.floor(Math.random() * enemiesBuffer.length);
+            if(!enemiesBuffer[i]) {
+                let g = new Enemy("bossEnemy", 0, 0);
+                g.x = Math.random() * (canvas.width - g.width);
+                counter++;
+            };
+        };
+        counter = 0;
+        while(counter < enemies) {
+            let i = Math.floor(Math.random() * enemiesBuffer.length);
+            if(!enemiesBuffer[i]) {
+                let g = new Enemy("enemy", 0, 0);
+                g.x = Math.random() * (canvas.width - g.width);
+                counter++;
+            };
+        }
+    };
+    new Enemy("bossEnemy", canvas.width/2, 0);
+};
+
+game.restart = () => {
+    $("splash").style.display = "none";
+    enemiesBuffer = [];
+    enemies = [];
+    explosions = [];
+    if(game.status === "win") game.currentLevel++;
+    game.createLevel();
+
+    if(game.currentLevel > 1)
+        player = new Tank("bossPlayer", 0, 0);
+
+    player.x = canvas.width/2 - player.width/2;
+    player.y = canvas.height - player.height;
+    player.transparency = 1;
+    player.health = 100;
+
+    game.hasStarted = true;
+    game.hasOver = false;
+
+    animationTime.t0 = new Date().getTime();
+    animationTime.eSpawnT0 = new Date().getTime();
+    animationTime.eSpawnInterval = 1000;
+};
+
+game.over = () => {
+    player.transparency = 1;
+    $("splash").style.display = "block";
+    let color = game.status === "over" ? "red" : "green";
+    $("game-status").innerHTML = `Game Status: <b style="color:${color}">${game.status}<b>`;
+    $("game-nextLevel").innerHTML = `Next Level: ${game.currentLevel}`;
+    game.hasStarted = false;
+    game.hasOver = true;
+};
+
+
+// basic collisions check
+collisions.rectTorect = (r1, r2) => !( r1.x>r2.x+r2.width || 
+    r1.x+r1.width<r2.x || r1.y>r2.y+r2.height || r1.y + r1.height < r2.y );
+
+collisions.rectToCirc = (r, c) => {
+    let dx = Math.abs(c.x - (r.x + r.width * .5));
+    let dy = Math.abs(c.y - (r.y + r.height * .5));
+    if(dx > c.r + r.width * .5) return false;
+    if(dy > c.r + r.height * .5) return false;
+    if(dx <= r.width) return true;
+    if(dy <= r.height) return true;
+    dx = dx - r.width;
+    dy = dy - r.height;
+    return dx * dx + dy * dy <= c.r * c.r;
+};
+
+collisions.circTocirc = (c1, c2) => {
+    let diffX = c2.x - c1.x;
+    let diffY = c2.y - c1.y;
+    let length = Math.hypot(diffX, diffY);
+    return length < c1.r + c2.r;
+};
+
+random.fromArray = arr => arr[Math.floor(Math.random() * arr.length)];
+
+random.minMax = (min, max) => Math.random() * (max - min + 1) + min;
+
+const $ = id => document.getElementById(id);
+
+const writeText = (txt, x, y, font="bold 10px Arial") => {
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = font;
+    ctx.fillText(txt, x, y);
+};
+
+
+const update = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    animationTime.now = new Date().getTime();
+    animationTime.dt = Math.abs(animationTime.now - animationTime.t0) * 0.001;
+    animationTime.t0 = animationTime.now;
+    if(animationTime.dt > 0.2) animationTime.dt = 0;
+    if(game.hasStarted) {
+        if(!enemies.length) Enemy.spawn();
+        if(Math.abs(animationTime.now - animationTime.eSpawnT0) >= 
+        animationTime.eSpawnInterval) {
+            if(enemies.length >= 3) {
+                Enemy.spawn();
+                animationTime.setInterval = Math.random() * 10000 + 10000;
+            }
+            else {
+                Enemy.spawn();
+                animationTime.setInterval = Math.random() * 5000 + 5000;
+            }
+            animationTime.eSpawnT0 = animationTime.now;
+        }
+    }
+    // update enemies
+    enemies.forEach(enemy => {
+        if(collisions.rectTorect(enemy, player)) {
+            enemy.explode();
+            player.explode();
+            player.health = 0;
+            enemy.health = 0;
+        }
+        enemy.update();
+    });
+    // update player
+    player.update();
+    // update bullets 
+    bullets.forEach(bullet => bullet.update());
+    // update explosions
+    explosions.forEach((exp, i) => {
+        exp.l--;
+        if(exp.l <= 0)
+            explosions.splice(i, 1);
+        exp.x += Math.cos(exp.a);
+        exp.y += Math.sin(exp.a);
+        ctx.save();
+        ctx.globalAlpha = exp.l/100;
+        ctx.fillStyle = exp.c;
+        ctx.beginPath();
+        ctx.arc(exp.x, exp.y, graphics.size * .5, 0, 2*Math.PI);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+    });
+
+    ctx.fillStyle = "rgba(0, 0, 0, .5)";
+    ctx.fillRect(0, 0, canvas.width, 20);
+    ctx.fillStyle = player.healthColor;
+    ctx.fillRect(0, 0, player.health, 10);
+    ctx.strokeStyle = "white";
+    ctx.strokeRect(0, 0, 100, 10);
+    ctx.fillStyle = "white";
+
+    writeText("HP", 120, 5);
+    writeText(`Level: ${game.currentLevel}`, canvas.width - 50, 5);
+
+    if(!enemiesBuffer.length && !enemies.length) {
+        game.status = "win";
+        game.over();
+    }
+
+    requestAnimationFrame(update);
+};
+
+
+addEventListener("load", () => {
+    canvas = $("canvas");
+    splash = $("splash");
+    ctrlBtns = document.querySelectorAll(".ctrl-btn");
+    game.init();
+
+    ctx = canvas.getContext("2d");
+
+    player = new Tank("player", 0, 0);
+    player.x = canvas.width/2 - player.width/2;
+    player.y = canvas.height - player.height;
+    player.id = "player";
+
+    animationTime = new Time();
+
+    requestAnimationFrame(update);
+
+    addEventListener("keydown", e => {
+        if(game.hasStarted) {
+            if(e.keyCode === 37) 
+                player.spriteFrame--;
+            else if(e.keyCode === 39) 
+                player.spriteFrame++;
+            else if(e.keyCode === 38)
+                player.setVelocity();
+            else if(e.keyCode === 32)
+                Bullet.create(player);
+        }
+    });
+
+    $("btn-lrot").onclick = () => player.spriteFrame--;
+    $("btn-rrot").onclick = () => player.spriteFrame++;
+    $("btn-move").onclick = () => player.setVelocity();
+    $("btn-shoot").onclick = () => Bullet.create(player);
+    $("play-btn").onclick = () => game.restart();
+
+});
+</script>
+</html>
