@@ -1,0 +1,37 @@
+<p>You have $<span id="qqa">0</span></p>
+<hr>
+<button align="center"id="bqw">+</button>
+<style>
+  body{background-color:red;}
+  button{width:350px;height:75px;background:repeating-linear-gradient(yellow, red 1px);border-radius:100px;border-color:black;box-shadow:10px 10px 10px green;}
+</style>
+<script>
+  window.onload=function() {
+    var clk =  document.getElementById("qqa");
+    var btn = document.getElementById("bqw")
+
+    var clickNum = 0;
+
+    btn.onclick = function () {
+        clickNum++;
+        clk.innerHTML = clickNum;
+
+        btn.innerHTML = clickNum;
+         
+        switch (clickNum) {
+            case 0:
+                clk.classList.add("big");
+                break;
+            case -15:
+                clk.classList.add("bigger");
+                break ;
+            case 20:
+                clk.classList.add("biggest");
+                break;
+            case 30:
+                clk.classList.add("large");
+                break;
+        }
+    }
+}
+</script>
