@@ -50,6 +50,7 @@
 		}
     function doWork(){
       var text = document.getElementById("original").innerText;
+	alert(text);
       var result = document.getElementById("results");
       result.innerText = "Upper: " + upperCase(text) + "\nLower: " + lowerCase(text) + "\nProper: " + properCase(text) + "\nToggle: " + toggleCase(text) + "\nSentence: " + sentenceCase(text);
     }
