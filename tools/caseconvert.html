@@ -51,7 +51,7 @@
     function doWork(){
       var text = document.getElementById("original");
       var result = document.getElementById("results");
-      result.innerText = "Upper: " + upperCase(text.innerText) + "\nLower: " + lowerCase(text.innerText) + "\nProper: " + properCase(text.innerText) + "\nToggle: " + toggleCase(text.innerText) + "\nSentence: " + sentenceCase(text.innerText);
+      result.innerText = "Upper: " + upperCase(text.textContent) + "\nLower: " + lowerCase(text.textContent) + "\nProper: " + properCase(text.textContent) + "\nToggle: " + toggleCase(text.textContent) + "\nSentence: " + sentenceCase(text.textContent);
     }
   </script>
 </body>
