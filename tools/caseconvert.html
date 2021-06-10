@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Case Converter</title>
+</head>
+<body>
+<h1>Case Converter</h3>
+<body>
+  <input id="original"></input>
+  <input type="submit" onclick="doWork()"></input>
+  </br>
+  <p id="results"></p>
+</body>
+
+<script type="text/javascript">
+		function upperCase(text){
+			return text.toUpperCase();
+		}
+
+		function lowerCase(text){
+			return text.toLowerCase();
+		}
+
+		function properCase(text){
+			return text.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+		}
+
+		function toggleCase(text){
+			var size = text.length;
+			var output = "";
+			for(var i = 0; i < size; i++)
+			{
+				var asc = text.charCodeAt(i);
+				if(asc > 64 && asc < 91)
+					output += String.fromCharCode(asc + 32);
+				else if(asc > 96 && asc < 123)
+					output += String.fromCharCode(asc - 32);
+				else if(asc != 0)
+					output += text.charAt(i);
+			}
+			return output;
+		}
+
+		function sentenceCase(text){
+			text = text.toLowerCase();
+			var rg = /(^\w{1}|\.\s*\w{1})/gi;
+			return text.replace(rg, function(toReplace) {
+				return toReplace.toUpperCase();
+			});
+		}
+    function doWork(){
+      var text = document.getElementById("original").innerText;
+      var result = document.getElementById("result").innerText;
+      result += "Upper: " + upperCase(text) + "\nLower: " + lowerCase(text) + "\nProper: " + properCase(text) + "\nToggle: " + toggleCase(text) + "\nSentence: " + sentenceCase(text);
+    }
+  </script>
+</body>
+</html>
+ 
