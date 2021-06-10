@@ -49,10 +49,9 @@
 			});
 		}
     function doWork(){
-      var text = document.getElementById("original").innerText;
-	alert(text);
+      var text = document.getElementById("original");
       var result = document.getElementById("results");
-      result.innerText = "Upper: " + upperCase(text) + "\nLower: " + lowerCase(text) + "\nProper: " + properCase(text) + "\nToggle: " + toggleCase(text) + "\nSentence: " + sentenceCase(text);
+      result.innerText = "Upper: " + upperCase(text.innerText) + "\nLower: " + lowerCase(text.innerText) + "\nProper: " + properCase(text.innerText) + "\nToggle: " + toggleCase(text.innerText) + "\nSentence: " + sentenceCase(text.innerText);
     }
   </script>
 </body>
