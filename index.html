@@ -42,76 +42,8 @@
 <body style="padding:10px">
 	
 	<!-- Navbar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
-		<a class="navbar-brand hvr-grow-shadow solid" href="/hexadev">
-			<img src="https://falcn8.github.io/hexadev/img/hexa.png" width="44" height="33" class="d-inline-block align-top" alt="hexa">
-			Hexa Development&nbsp;&nbsp;
-		</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			<div class="navbar-nav">
-				<a class="nav-item nav-link active" href="/hexadev">Home <span class="sr-only">(current)</span></a>
-				<a class="nav-item nav-link" href="/hexadev/members">Members</a>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				  		Games
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="/hexadev/games/2048">2048&nbsp;&nbsp;<span class="badge badge-info">Desktop</span></a>
-						<a class="dropdown-item" href="/hexadev/games/archery">Archery&nbsp;&nbsp;<span class="badge badge-info">Both</span></a>
-						<a class="dropdown-item" href="/hexadev/games/cardodge">Car Dodge&nbsp;&nbsp;<span class="badge badge-info">Both</span></a>
-						<a class="dropdown-item" href="/hexadev/games/clicker">Clicker&nbsp;&nbsp;<span class="badge badge-info">Both</span></a>
-						<a class="dropdown-item" href="/hexadev/games/flappybird">Flappy Bird&nbsp;&nbsp;<span class="badge badge-info">Unknown</span></a>
-						<a class="dropdown-item" href="/hexadev/games/joystick">Joystick&nbsp;&nbsp;<span class="badge badge-info">Both</span></a>
-						<a class="dropdown-item" href="/hexadev/games/minesweeper">Minesweeper&nbsp;&nbsp;<span class="badge badge-info">Both</span></a>
-						<a class="dropdown-item" href="/hexadev/games/psychic">Psychic&nbsp;&nbsp;<span class="badge badge-info">Both</span></a>
-						<a class="dropdown-item" href="/hexadev/games/skiing">Skiing&nbsp;&nbsp;<span class="badge badge-info">Mobile</span></a>
-						<a class="dropdown-item" href="/hexadev/games/snake">Snake&nbsp;&nbsp;<span class="badge badge-info">Desktop</span></a>
-						<a class="dropdown-item" href="/hexadev/games/tankio">Tank.io&nbsp;&nbsp;<span class="badge badge-info">Unknown</span></a>
-						<a class="dropdown-item" href="/hexadev/games/trex">T-rex&nbsp;&nbsp;<span class="badge badge-info">Unknown</span></a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item disabled">More Coming Soon!</a>
-					</div>
-			      	</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				  		Arts
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="/hexadev/arts/captcha">Captcha&nbsp;&nbsp;<span class="badge badge-info">Both</span></a>
-						<a class="dropdown-item" href="/hexadev/arts/fireworks">Fireworks&nbsp;&nbsp;<span class="badge badge-info">Both</span></a>
-						<a class="dropdown-item" href="/hexadev/arts/soul">Soul&nbsp;&nbsp;<span class="badge badge-info">Both</span></a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item disabled">More Coming Soon!</a>
-					</div>
-			      	</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				  		Bots
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="/hexadev/bots/alti">Alti&nbsp;&nbsp;<span class="badge badge-info">Both</span></a>
-						<a class="dropdown-item" href="/hexadev/bots/hex">Hex&nbsp;&nbsp;<span class="badge badge-info">Both</span></a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item disabled">More Coming Soon!</a>
-					</div>
-			      	</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				  		Miscellaneous
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="/hexadev/misc/chatapp">Chat App&nbsp;&nbsp;<span class="badge badge-info">Both</span></a>
-						<a class="dropdown-item" href="/hexadev/misc/guessthiscode">Guess This Code&nbsp;&nbsp;<span class="badge badge-info">Both</span></a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item disabled">More Coming Soon!</a>
-					</div>
-			      	</li>
-			</div>
-		</div>
-	</nav>
+	<div id="nav-placeholder"></div>
+	<script>$(function(){$("#nav-placeholder").load("/hexadev/components/navbar.html");});</script>
 	
 	</br>
 	
